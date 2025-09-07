@@ -126,10 +126,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Cloudinary
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-}
+    'CLOUD_NAME': 'dzkrrgrgp',
+    'API_KEY': '488266256863375',
+    'API_SECRET': 'A4odBTs0BsOYQPhRK_4XWnbHk_w',
+
+    }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
