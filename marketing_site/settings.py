@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False") == "True"
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://singlepageecommercesite.onrender.com/" ]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "singlepageecommercesite.onrender.com" ]
 
 # Installed apps
 INSTALLED_APPS = [
@@ -34,7 +34,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "yourproject.urls"
+ROOT_URLCONF = "marketing_site.urls"
 
 TEMPLATES = [
     {
@@ -52,7 +52,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "yourproject.wsgi.application"
+WSGI_APPLICATION = "marketing_site.wsgi.application"
 
 # Database
 DATABASES = {
