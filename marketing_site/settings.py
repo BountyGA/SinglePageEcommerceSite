@@ -1,14 +1,16 @@
-
 import os
 from pathlib import Path
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", "changeme")
 DEBUG = os.getenv("DEBUG", "False") == "True"
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "singlepageecommercesite.onrender.com" ]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "singlepageecommercesite.onrender.com"]
 
 # Installed apps
 INSTALLED_APPS = [
@@ -18,14 +20,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # 3rd-party
     "cloudinary",
     "cloudinary_storage",
+
+    # your apps
     "products",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # for static files
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # serves static files
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -54,10 +60,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "marketing_site.wsgi.application"
 
-# Database
+# Database (Render provides DATABASE_URL env)
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.getenv("DATABASE_URL"), conn_max_age=600, ssl_require=True
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True
     )
 }
 
@@ -75,14 +83,24 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# Static & Media files
+# Static files (served with Whitenoise)
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-MEDIA_URL = "/media/"
-
+# Cloudinary storage for media
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME", "dzkrrgrgp"),
+    "API_KEY": os.getenv("CLOUDINARY_API_KEY", "488266256863375"),
+    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET", "A4odBTs0BsOYQPhRK_4XWnbHk_w"),
+}
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
+# MEDIA settings (Django needs this, even if Cloudinary is used)
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+# Cloudinary direct URL (alternative config method)
 CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 
 # Default primary key field type
