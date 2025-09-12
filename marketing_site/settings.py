@@ -4,8 +4,10 @@ import dj_database_url
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")  
 
 # Security
 SECRET_KEY = os.getenv("SECRET_KEY", "changeme")
@@ -90,9 +92,9 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Cloudinary storage for media
 CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME", "dzkrrgrgp"),
-    "API_KEY": os.getenv("CLOUDINARY_API_KEY", "488266256863375"),
-    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET", "A4odBTs0BsOYQPhRK_4XWnbHk_w"),
+    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
 }
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
