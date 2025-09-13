@@ -17,7 +17,7 @@ def product_list(request):
         products_qs = products_qs.filter(category__id=category_filter)
 
     # Pagination
-    paginator = Paginator(products_qs, 6)
+    paginator = Paginator(products_qs, 8)
     page_number = request.GET.get("page")
     products = paginator.get_page(page_number)
 
