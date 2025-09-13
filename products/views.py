@@ -9,7 +9,7 @@ def product_list(request):
     # Search
     query = request.GET.get("q")
     if query:
-        products_qs = products_qs.filter(name__icontains=query) | products_qs.filter(description__icontains=query)
+        products_qs = products_qs.filter(name__icontains=query)
 
     # Filter by category
     category_filter = request.GET.get("category")
